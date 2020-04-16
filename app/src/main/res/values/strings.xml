@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">JDApp</string>
+    <string name="main_menuTitile">JD App</string>
+    <string name="main_button1">Find Sygehus</string>
 </resources>
