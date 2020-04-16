@@ -1,6 +1,9 @@
 package com.example.jdapp
 
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.jdapp.database.FirestoreController
 import com.google.firebase.firestore.FirebaseFirestore
@@ -14,8 +17,12 @@ class MainActivity : AppCompatActivity() {
 
         val dbController = FirestoreController()
 
-        dbController.addHospital("Skejby","A danish institution", 66.8,78.3)
-        dbController.getHospital()
+        //dbController.addHospital("Skejby","A danish institution", 66.8,78.3)
+        //dbController.getHospital()
+        var p = dbController.getHospitals().size
+
+        Toast.makeText(applicationContext,"this is toast message " +p,Toast.LENGTH_SHORT).show()
+
 
     }
 }
