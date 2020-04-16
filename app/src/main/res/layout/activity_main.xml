@@ -33,6 +33,7 @@
         android:layout_marginRight="164dp"
         android:layout_marginBottom="573dp"
         android:text="@string/main_button1"
+        android:onClick="onClickHospital"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
