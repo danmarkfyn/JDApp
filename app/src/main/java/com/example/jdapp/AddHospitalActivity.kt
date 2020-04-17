@@ -4,7 +4,11 @@ import android.content.ContentValues
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.TextureView
+import android.view.View
+import android.widget.TextView
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_add_hospital.*
 
 class AddHospitalActivity : AppCompatActivity() {
 
@@ -14,6 +18,13 @@ class AddHospitalActivity : AppCompatActivity() {
 
         val myDB = FirebaseFirestore.getInstance()
         addHospital(myDB,"nyt out","Nyt hospital", 1.1,3.2)
+
+        val nameEditText = findViewById<TextView>(R.id.addhospital_nameEditText)
+        val hospitalName = nameEditText.text
+
+
+        //val textView = findViewById<TextView>(R.id.textView2)
+        //textView.text = hospitalSelected
 
     }
 
@@ -35,5 +46,10 @@ class AddHospitalActivity : AppCompatActivity() {
             .addOnFailureListener { e ->
                 Log.w(ContentValues.TAG, "Error: ", e)
             }
+    }
+
+    //Function for submit button in AddHospitalActivity
+    fun onClickSubmit(view: View) {
+       
     }
 }
