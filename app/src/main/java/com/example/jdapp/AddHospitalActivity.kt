@@ -4,7 +4,6 @@ import android.content.ContentValues
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.jdapp.model.FirestoreController
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AddHospitalActivity : AppCompatActivity() {
@@ -28,7 +27,7 @@ class AddHospitalActivity : AppCompatActivity() {
             "y_coord" to y_coord
         )
 
-        FirestoreController.myDB.collection("Hospitals")
+        myDB.collection("Hospitals")
             .add(hospital as Map<String, Any>)
             .addOnSuccessListener { documentReference ->
                 Log.w(ContentValues.TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
