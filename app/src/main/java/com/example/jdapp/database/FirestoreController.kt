@@ -9,8 +9,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 // Singleton to avoid several instantiations of DB access
 object FirestoreController {
 
-
-
     private val hospitals = ArrayList<Hospital>()
     val myDB = FirebaseFirestore.getInstance()
 
@@ -36,8 +34,6 @@ object FirestoreController {
     // TODO need to return a string
     // TODO Also https://stackoverflow.com/questions/39798269/return-from-lambdas-or-kotlin-return-is-not-allowed-here
     fun getHospitals(): ArrayList<Hospital>{
-
-
 
         myDB.collection("Hospitals")
             .get()
