@@ -1,16 +1,12 @@
 package com.example.jdapp
 
-import androidx.fragment.app.FragmentActivity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.activity_hospitaldetails.*
 
 class HospitalDetailsActivity : AppCompatActivity(),  OnMapReadyCallback {
 
@@ -27,7 +23,7 @@ class HospitalDetailsActivity : AppCompatActivity(),  OnMapReadyCallback {
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-        setUpMap(gMap!!)
+        //setUpMap(gMap!!)
 
         /*
         (map as SupportMapFragment).getMapAsync{
@@ -39,7 +35,7 @@ class HospitalDetailsActivity : AppCompatActivity(),  OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap?) {
         gMap = map
-        val hospitalPosition = LatLng(hospitalLat, hospitalLong)
+        val hospitalPosition = com.google.android.gms.maps.model.LatLng(hospitalLat, hospitalLong)
         val hospitalMarker: MarkerOptions = MarkerOptions().position(hospitalPosition)
         val zoomLevel = 10.0f
 
