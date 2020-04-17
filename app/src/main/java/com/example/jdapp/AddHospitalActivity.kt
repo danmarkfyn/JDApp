@@ -21,8 +21,6 @@ class AddHospitalActivity : AppCompatActivity() {
 
         val nameEditText = findViewById<TextView>(R.id.addhospital_nameEditText)
         val hospitalName = nameEditText.text
-
-
         //val textView = findViewById<TextView>(R.id.textView2)
         //textView.text = hospitalSelected
 
@@ -50,6 +48,6 @@ class AddHospitalActivity : AppCompatActivity() {
 
     //Function for submit button in AddHospitalActivity
     fun onClickSubmit(view: View) {
-       
+
     }
 }
