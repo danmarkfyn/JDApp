@@ -59,6 +59,7 @@ class HospitalsActivity : AppCompatActivity() {
                     val intent = Intent(this, HospitalDetailsActivity::class.java)
 
                     // TODO pass selected name, description & x,y
+                    // TODO show distance from current pos
                     intent.putExtra("HospitalName", selectedHospital.toString())
                     startActivity(intent)
                 }
