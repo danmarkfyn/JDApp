@@ -15,11 +15,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val dbController = FirestoreController()
+        val dbController = FirestoreController
 
         //dbController.addHospital("Skejby","A danish institution", 66.8,78.3)
         //dbController.getHospital()
-        var p = dbController.getHospitals().size
+        var p = dbController.getHospitals()
 
         Toast.makeText(applicationContext,"this is toast message " +p,Toast.LENGTH_SHORT).show()
 

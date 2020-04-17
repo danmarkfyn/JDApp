@@ -2,12 +2,16 @@ package com.example.jdapp.database
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import kotlin.text.*
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-// TODO make singleton to avoid several controllers
-class FirestoreController() {
+// Singleton to avoid several instantiations of DB access
+object FirestoreController {
 
+
+
+    private val hospitals = ArrayList<Hospital>()
     val myDB = FirebaseFirestore.getInstance()
 
     fun addHospital(name: String, description: String,
@@ -33,7 +37,7 @@ class FirestoreController() {
     // TODO Also https://stackoverflow.com/questions/39798269/return-from-lambdas-or-kotlin-return-is-not-allowed-here
     fun getHospitals(): ArrayList<Hospital>{
 
-        val hospitals = ArrayList<Hospital>()
+
 
         myDB.collection("Hospitals")
             .get()
@@ -47,6 +51,7 @@ class FirestoreController() {
                         document.get("y_coord").toString().toDouble()
                     )
 
+
                     hospitals.add(h)
                     Log.d(TAG, "Size of arraylist " + hospitals.size)
                     Log.d(TAG, "Retrieved from DB${h}")
@@ -59,12 +64,12 @@ class FirestoreController() {
             }
 
     fun getHospital(){
+
         myDB.collection("Hospitals")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
                     Log.d(TAG, "Retrieved from DB${document.id} => ${document.data}")
-
                 }
             }
             .addOnFailureListener { e ->
