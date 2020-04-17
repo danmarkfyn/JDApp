@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Gradient Bluesky-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+            <gradient
+                android:startColor="#153498"
+                android:centerColor="#69DCED"
+                android:endColor="#f3f3f3"
+                android:angle="135"/>
+            <corners android:radius="0dp" />
+        </shape>
+    </item>
+</selector>

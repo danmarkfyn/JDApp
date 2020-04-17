@@ -18,5 +18,8 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, HospitalsActivity::class.java)
         startActivity(intent)
     }
-
+    fun onClickAbout (view: View) {
+        val intent = Intent(this, AboutActivity::class.java)
+        startActivity(intent)
+    }
 }
