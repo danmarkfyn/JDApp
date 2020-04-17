@@ -18,9 +18,14 @@ class HospitalDetailsActivity : AppCompatActivity(),  OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospitaldetails)
 
-        //val extras = intent.extras ?: return
-        //val hospitalSelected = extras.getString("HospitalName")
+        val extras = intent.extras ?: return
+        val hospitalSelected = extras.getString("HospitalName")
+/*
+        val textView = findViewById<TextView>(R.id.textView2)
+        textView.text = hospitalSelected
 
+
+ */
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         //setUpMap(gMap!!)
@@ -34,6 +39,7 @@ class HospitalDetailsActivity : AppCompatActivity(),  OnMapReadyCallback {
     }
 
     override fun onMapReady(map: GoogleMap?) {
+
         gMap = map
         val hospitalPosition = com.google.android.gms.maps.model.LatLng(hospitalLat, hospitalLong)
         val hospitalMarker: MarkerOptions = MarkerOptions().position(hospitalPosition)
@@ -49,6 +55,7 @@ class HospitalDetailsActivity : AppCompatActivity(),  OnMapReadyCallback {
     private fun setUpMap(map: GoogleMap) {
         map.uiSettings.setZoomControlsEnabled(true)
         map.mapType = GoogleMap.MAP_TYPE_HYBRID
+
     }
 
 }

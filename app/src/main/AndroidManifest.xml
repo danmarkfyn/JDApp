@@ -9,11 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AddHospitalActivity"></activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAZavIWF_2kI12SRwa9KVvYYqGIm57ehX0" />
 
-        <activity android:name=".HospitalDetailsActivity"></activity>
+        <activity android:name=".HospitalDetailsActivity" />
         <activity android:name=".HospitalsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

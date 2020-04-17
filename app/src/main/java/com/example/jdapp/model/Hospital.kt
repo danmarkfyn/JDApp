@@ -1,4 +1,4 @@
-package com.example.jdapp.database
+package com.example.jdapp.model
 
 data class Hospital(val name: String,
                     val description: String,

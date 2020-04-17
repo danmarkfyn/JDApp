@@ -7,6 +7,7 @@ import android.view.View
 
 class MainActivity : AppCompatActivity() {
 
+    // TODO layout naming convetion  https://jeroenmols.com/blog/2016/03/07/resourcenaming/
     override fun onCreate (savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

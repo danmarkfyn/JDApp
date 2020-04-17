@@ -1,8 +1,7 @@
-package com.example.jdapp.database
+package com.example.jdapp.model
 
 import android.content.ContentValues.TAG
 import android.util.Log
-import kotlin.text.*
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -30,34 +29,6 @@ object FirestoreController {
         .addOnFailureListener { e ->
             Log.w(TAG, "Error: ", e)
         }
-}
-    // TODO need to return a string
-    // TODO Also https://stackoverflow.com/questions/39798269/return-from-lambdas-or-kotlin-return-is-not-allowed-here
-    fun getHospitals(): ArrayList<Hospital>{
-
-        myDB.collection("Hospitals")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-
-                    val h = Hospital(
-                        document.getString("name").toString(),
-                        document.getString("description").toString(),
-                        document.get("x_coord").toString().toDouble(),
-                        document.get("y_coord").toString().toDouble()
-                    )
-
-
-                    hospitals.add(h)
-                    Log.d(TAG, "Size of arraylist " + hospitals.size)
-                    Log.d(TAG, "Retrieved from DB${h}")
-                    }
-                }
-                    .addOnFailureListener { e ->
-                        Log.w(TAG, "Error: ", e)
-                    }
-                return hospitals
-            }
 
     fun getHospital(){
 
@@ -73,5 +44,6 @@ object FirestoreController {
             }
         }
     }
+}
 
 
