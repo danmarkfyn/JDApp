@@ -4,4 +4,7 @@
     <string name="main_button1">Find Hospital</string>
     <string name="main_button2">About</string>
     <string name="hospital_button1">Add Hospital</string>
+    <string name="addHospitalActivity_submitButton">Submit</string>
+    <string name="addHospitalLayout_nameTextView">Hospital Name</string>
+    <string name="addHospitalLayout_descriptionTextView">Description</string>
 </resources>

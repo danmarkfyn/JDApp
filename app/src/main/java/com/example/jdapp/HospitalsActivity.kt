@@ -30,7 +30,7 @@ class HospitalsActivity : AppCompatActivity() {
     }
 
 // TODO fun explanation
-private fun getHospitals(myDB : FirebaseFirestore, listOfHospitals : ListView){
+    fun getHospitals(myDB : FirebaseFirestore, listOfHospitals : ListView){
 
         myDB.collection("Hospitals")
             .get()
@@ -53,12 +53,9 @@ private fun getHospitals(myDB : FirebaseFirestore, listOfHospitals : ListView){
 
                 listOfHospitals.adapter = arrayAdapter
 
-                listOfHospitals.FixedViewInfo()
-
                 listOfHospitals.setOnItemClickListener { adapterview, view, i, id ->
 
                     val selectedHospital = arrayAdapter.getItem(i)
-
                     val intent = Intent(this, HospitalDetailsActivity::class.java)
 
                     // TODO pass selected name, description & x,y
