@@ -11,7 +11,7 @@ import android.widget.ListView
 import com.example.jdapp.model.Hospital
 import com.google.firebase.firestore.FirebaseFirestore
 
-class HospitalsActivity : AppCompatActivity() {
+class DisplayHospitalsActivity : AppCompatActivity() {
 
     private val hospitals = ArrayList<Hospital>()
 
@@ -24,19 +24,18 @@ class HospitalsActivity : AppCompatActivity() {
 
         getHospitals(myDB,listOfHospitals)
     }
-    fun onClickHospital (view: View) {
+fun onClickAddHospital (view : View) {
         val intent = Intent(this, AddHospitalActivity::class.java)
         startActivity(intent)
     }
 
 // TODO fun explanation
-    fun getHospitals(myDB : FirebaseFirestore, listOfHospitals : ListView){
+private fun getHospitals(myDB : FirebaseFirestore, listOfHospitals : ListView){
 
         myDB.collection("Hospitals")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
-
                     val h = Hospital(
                         document.getString("name").toString(),
                         document.getString("description").toString(),
@@ -49,10 +48,8 @@ class HospitalsActivity : AppCompatActivity() {
                 Log.d(ContentValues.TAG, "Size of arraylist " + hospitals.size)
 
 
-               val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, hospitals)
-
+                val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, hospitals)
                 listOfHospitals.adapter = arrayAdapter
-
                 listOfHospitals.setOnItemClickListener { adapterview, view, i, id ->
 
                     val selectedHospital = arrayAdapter.getItem(i)

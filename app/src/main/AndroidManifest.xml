@@ -16,7 +16,7 @@
 
         <activity android:name=".AddHospitalActivity" />
         <activity android:name=".HospitalDetailsActivity" />
-        <activity android:name=".HospitalsActivity" />
+        <activity android:name=".DisplayHospitalsActivity" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

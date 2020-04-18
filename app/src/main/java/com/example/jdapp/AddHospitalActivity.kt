@@ -8,6 +8,7 @@ import android.view.TextureView
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import com.google.android.gms.maps.GoogleMap
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_add_hospital.*
 
@@ -27,7 +28,7 @@ class AddHospitalActivity : AppCompatActivity() {
 
     }
 
-    fun addHospital(myDB : FirebaseFirestore, name: String, description: String,
+private fun addHospital(myDB : FirebaseFirestore, name: String, description: String,
                     x_coord: Double, y_coord: Double) {
 
         val hospital = hashMapOf(
@@ -36,7 +37,6 @@ class AddHospitalActivity : AppCompatActivity() {
             "x_coord" to x_coord,
             "y_coord" to y_coord
         )
-
         myDB.collection("Hospitals")
             .add(hospital as Map<String, Any>)
             .addOnSuccessListener { documentReference ->
@@ -47,8 +47,15 @@ class AddHospitalActivity : AppCompatActivity() {
             }
     }
 
+fun locationPicker(gMap: GoogleMap){
+
+
+
+}
+
+
     //Function for submit button in AddHospitalActivity
-    fun onClickSubmit(view: View) {
+fun onClickSubmit(view: View) {
 
         addHospital_submitButton.setOnClickListener {
             val builder = AlertDialog.Builder(this)

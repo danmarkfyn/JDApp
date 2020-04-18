@@ -12,13 +12,10 @@ class AboutActivity : AppCompatActivity(){
         setContentView(R.layout.activity_about)
 
     }
-
     fun onClickLink (view: View) {
         val openURI = Intent(android.content.Intent.ACTION_VIEW)
         openURI.data = Uri.parse("https://www.linkedin.com/in/jakob-tøth")
 
         startActivity(openURI)
     }
-
-
 }
