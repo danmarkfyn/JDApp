@@ -7,4 +7,5 @@
     <string name="addHospitalActivity_submitButton">Submit</string>
     <string name="addHospitalLayout_nameTextView">Hospital Name</string>
     <string name="addHospitalLayout_descriptionTextView">Description</string>
+    <string name="displayHospitals_filterTextView">Filter</string>
 </resources>
