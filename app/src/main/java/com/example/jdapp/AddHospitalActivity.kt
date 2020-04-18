@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.TextureView
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_add_hospital.*
 
@@ -49,5 +50,14 @@ class AddHospitalActivity : AppCompatActivity() {
     //Function for submit button in AddHospitalActivity
     fun onClickSubmit(view: View) {
 
+        addHospital_submitButton.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Saving Hospital")
+            builder.setMessage("Are you sure you want to save this hospital?")
+
+            //Showing the alert dialog
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+        }
     }
 }

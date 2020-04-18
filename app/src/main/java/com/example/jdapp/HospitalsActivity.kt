@@ -24,6 +24,7 @@ class HospitalsActivity : AppCompatActivity() {
 
         getHospitals(myDB,listOfHospitals)
     }
+
     fun onClickHospital (view: View) {
         val intent = Intent(this, AddHospitalActivity::class.java)
         startActivity(intent)
@@ -49,13 +50,19 @@ class HospitalsActivity : AppCompatActivity() {
                 Log.d(ContentValues.TAG, "Size of arraylist " + hospitals.size)
 
                 val arrayAdapter: ArrayAdapter<*>
+
+
                 arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, hospitals)
+
+                for(item in hospitals) {
+                    listOfHospitals.adapter
+                }
+
                 listOfHospitals.adapter = arrayAdapter
 
                 listOfHospitals.setOnItemClickListener { adapterview, view, i, id ->
 
                     val selectedHospital = arrayAdapter.getItem(i)
-
                     val intent = Intent(this, HospitalDetailsActivity::class.java)
 
                     // TODO pass selected name, description & x,y

@@ -2,6 +2,7 @@ package com.example.jdapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -20,6 +21,7 @@ class HospitalDetailsActivity : AppCompatActivity(),  OnMapReadyCallback {
 
         val extras = intent.extras ?: return
         val hospitalSelected = extras.getString("HospitalName")
+
 /*
         val textView = findViewById<TextView>(R.id.textView2)
         textView.text = hospitalSelected
