@@ -105,13 +105,13 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
                 builder.setPositiveButton(R.string.alert_positiveButton){dialog, which ->
                     hospitalName = nameEditText.text.toString()
                     hospitalDescription = descriptionEditText.text.toString()
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, DisplayHospitalsActivity::class.java)
                     startActivity(intent)
                     addHospital(myDB,hospitalName,hospitalDescription, lat,long)
                 }
 
                 builder.setNegativeButton(R.string.alert_negativeButton){dialog, which ->
-                    //TODO
+                    //TODO Clean textfields
                 }
 
                 builder.setNeutralButton(R.string.alert_neutralButton){dialog, which ->

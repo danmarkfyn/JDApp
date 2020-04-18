@@ -26,11 +26,12 @@ class DisplayHospitalsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_displayhospitals)
 
+        hospitals.clear()
         types.add("No Filters")
 
         var listOfHospitals = findViewById<ListView>(R.id.listOfHospitals)
         val filterSpinner: Spinner = findViewById(R.id.filterSpinner)
-        getHospitals(myDB, listOfHospitals)
+
 
         // sets up ArrayAdapter to fill spinner with array entities
         val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, types)
@@ -63,7 +64,7 @@ class DisplayHospitalsActivity : AppCompatActivity() {
     }
 
 private fun getHospitals(myDB : FirebaseFirestore, listOfHospitals : ListView) {
-
+    Log.d(ContentValues.TAG, "Getting Entities from DB")
         myDB.collection("Hospitals")
             .get()
             .addOnSuccessListener { result ->
@@ -91,7 +92,7 @@ private fun getHospitals(myDB : FirebaseFirestore, listOfHospitals : ListView) {
                     if(selected == "No Filters"){
                         hospitals.add(h)
                     }else{
-                        if(selected == h.city.trim().toLowerCase()){
+                        if(selected == h.city.trim().toLowerCase() && selected != "No Filters"){
                             hospitals.add(h)
                             Log.d(ContentValues.TAG, "Added hospital to list according to filers ")
                         }
