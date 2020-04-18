@@ -1,9 +1,18 @@
 <resources>
+
+    <!--Meta-->
     <string name="app_name">JDApp</string>
-    <string name="main_menuTitile">JD App</string>
+
+    <!--Main-->
+    <string name="main_menuTitle">JD App</string>
     <string name="main_button1">Find Hospital</string>
     <string name="main_button2">About</string>
     <string name="hospital_button1">Add Hospital</string>
+
+    <!--About-->
+    <string name="aboutActivity_titleTextView"><b>About</b></string>
+
+    <!--AddHospital-->
     <string name="addHospitalActivity_submitButton">Submit</string>
     <string name="addHospitalLayout_nameTextView">Hospital Name</string>
     <string name="addHospitalLayout_descriptionTextView">Description</string>
