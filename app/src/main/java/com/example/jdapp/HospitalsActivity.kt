@@ -30,7 +30,7 @@ class HospitalsActivity : AppCompatActivity() {
     }
 
 // TODO fun explanation
-    fun getHospitals(myDB : FirebaseFirestore, listOfHospitals : ListView){
+private fun getHospitals(myDB : FirebaseFirestore, listOfHospitals : ListView){
 
         myDB.collection("Hospitals")
             .get()
@@ -48,9 +48,12 @@ class HospitalsActivity : AppCompatActivity() {
                 }
                 Log.d(ContentValues.TAG, "Size of arraylist " + hospitals.size)
 
-                val arrayAdapter: ArrayAdapter<*>
-                arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, hospitals)
+
+               val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, hospitals)
+
                 listOfHospitals.adapter = arrayAdapter
+
+                listOfHospitals.FixedViewInfo()
 
                 listOfHospitals.setOnItemClickListener { adapterview, view, i, id ->
 
