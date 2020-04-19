@@ -2,6 +2,7 @@ package com.example.jdapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -11,36 +12,33 @@ import com.google.android.gms.maps.model.MarkerOptions
 class HospitalDetailsActivity : AppCompatActivity(),  OnMapReadyCallback {
 
     private var gMap: GoogleMap? = null
+    //TODO fix map location
     private var hospitalLat = 55.384035
     private var hospitalLong = 10.368267
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospitaldetails)
-
+        
         val extras = intent.extras ?: return
-        val hospitalSelected = extras.getString("HospitalName")
+        val selectedHospitalName = extras.getString("HospitalName")
+        val selectedHospitalDescription = extras.getString("HospitalDescription")
+        val selectedHospitalCity = extras.getString("HospitalCity")
 
-/*
-        val textView = findViewById<TextView>(R.id.textView2)
-        textView.text = hospitalSelected
+        val textViewName = findViewById<TextView>(R.id.hospitalDetails_hospitalName)
+        textViewName.text = selectedHospitalName
+        val textViewDescription = findViewById<TextView>(R.id.hospitalDetails_hospitalDescription)
+        textViewDescription.text = selectedHospitalDescription
+        val textViewCity = findViewById<TextView>(R.id.hospitalDetails_hospitalCity)
+        textViewCity.text = selectedHospitalCity
 
-
- */
+        //Map fragement for hospital location
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-        //setUpMap(gMap!!)
-
-        /*
-        (map as SupportMapFragment).getMapAsync{
-            gMap = it
-            setUpMap(gMap!!)
-        }*/
 
     }
 
     override fun onMapReady(map: GoogleMap?) {
-
         gMap = map
         val hospitalPosition = com.google.android.gms.maps.model.LatLng(hospitalLat, hospitalLong)
         val hospitalMarker: MarkerOptions = MarkerOptions().position(hospitalPosition)

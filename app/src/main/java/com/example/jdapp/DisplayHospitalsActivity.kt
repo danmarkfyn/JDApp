@@ -110,12 +110,22 @@ private fun getHospitals(myDB : FirebaseFirestore, listOfHospitals : ListView) {
                 listOfHospitals.setOnItemClickListener { adapterview, view, i, id ->
 
                     val selectedHospital = filterAdapter.getItem(i)
-                    val intent = Intent(this, HospitalDetailsActivity::class.java)
+                    //Values passed to the DisplayHospitalActvity
+                    val selectedHospitalName = selectedHospital?.name.toString()
+                    val selectedHospitalDescription = selectedHospital?.description.toString()
+                    val selectedHospitalCity = selectedHospital?.city.toString()
+                    //TODO pass geolocation for selected hospital
 
-                    // TODO pass selected name, description & x,y
-                    // TODO show distance from current pos
-                    intent.putExtra("HospitalName", selectedHospital.toString())
-                    startActivity(intent)
+                    //Intent for HospitalDetailsActivity
+                    val intent = Intent(this, HospitalDetailsActivity::class.java)
+                        intent.putExtra("HospitalName", selectedHospitalName)
+                        intent.putExtra("HospitalDescription", selectedHospitalDescription)
+                        intent.putExtra("HospitalCity", selectedHospitalCity)
+                        startActivity(intent)
+
+
+                    //intent.putExtra("HospitalName", selectedHospital.toString())
+
                 }
             }
             .addOnFailureListener { e ->
