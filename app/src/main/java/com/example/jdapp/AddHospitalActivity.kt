@@ -108,6 +108,7 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
                     val intent = Intent(this, DisplayHospitalsActivity::class.java)
                     startActivity(intent)
                     addHospital(myDB,hospitalName,hospitalDescription, lat,long)
+                    finish()
                 }
 
                 builder.setNegativeButton(R.string.alert_negativeButton){dialog, which ->
@@ -122,10 +123,6 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
     }
-
-
-
-
 }
 
 

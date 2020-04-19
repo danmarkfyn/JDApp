@@ -10,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Spinner
+import com.example.jdapp.adapters.FilterAdapter
 import com.example.jdapp.model.Hospital
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_displayhospitals.*
@@ -102,12 +103,14 @@ private fun getHospitals(myDB : FirebaseFirestore, listOfHospitals : ListView) {
                 }
                 Log.d(ContentValues.TAG, "Size of arraylist " + hospitals.size)
 
+                val filterAdapter =
+                    FilterAdapter(this, hospitals)
 
-                val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, hospitals)
-                listOfHospitals.adapter = arrayAdapter
+                listOfHospitals.adapter = filterAdapter
+
                 listOfHospitals.setOnItemClickListener { adapterview, view, i, id ->
 
-                    val selectedHospital = arrayAdapter.getItem(i)
+                    val selectedHospital = filterAdapter.getItem(i)
                     val intent = Intent(this, HospitalDetailsActivity::class.java)
 
                     // TODO pass selected name, description & x,y
