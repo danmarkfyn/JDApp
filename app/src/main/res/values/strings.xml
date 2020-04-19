@@ -16,6 +16,7 @@
     <string name="addHospitalLayout_nameTextView">Hospital Name</string>
     <string name="addHospitalLayout_descriptionTextView">Description</string>
     <string name="addHospitalLayout_cityTextView">City</string>
+    <string name="addHospitalLayout_seachTextView">Search</string>
         <!--Alert-->
         <string name="alert_positiveButton">Yes</string>
         <string name="alert_negativeButton">No</string>

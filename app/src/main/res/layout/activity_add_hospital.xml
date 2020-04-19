@@ -17,7 +17,20 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".HospitalDetailsActivity" />
 
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickSearchHospitalLocation"
+        android:text="@string/addHospitalLayout_seachTextView"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/map" />
+
+
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -32,8 +45,8 @@
             android:id="@+id/addhospital_nameTextView"
             android:layout_width="94dp"
             android:layout_height="wrap_content"
-            android:text="@string/addHospitalLayout_nameTextView"
             android:gravity="center"
+            android:text="@string/addHospitalLayout_nameTextView"
             app:layout_constraintBottom_toTopOf="@+id/addhospital_nameEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,9 +89,9 @@
             android:id="@+id/addhospital_cityTextView"
             android:layout_width="73dp"
             android:layout_height="wrap_content"
-            android:text="@string/addHospitalLayout_cityTextView"
-
             android:gravity="center"
+
+            android:text="@string/addHospitalLayout_cityTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/addhospital_nameEditText" />
