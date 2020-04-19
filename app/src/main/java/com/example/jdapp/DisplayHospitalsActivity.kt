@@ -71,7 +71,6 @@ private fun getHospitals(myDB : FirebaseFirestore, listOfHospitals : ListView) {
             .addOnSuccessListener { result ->
                 for (document in result) {
                     val h = Hospital(
-                        hospitals.size + 1,
                         document.getString("name").toString(),
                         document.getString("city").toString(),
                         document.getString("description").toString(),

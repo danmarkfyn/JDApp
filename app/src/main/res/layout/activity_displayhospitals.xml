@@ -5,38 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/map">
+
+    <Spinner
+            android:id="@+id/filterSpinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="30dp"
+            android:background = "@drawable/unique_spinner_1"
+            app:layout_constraintBottom_toTopOf="@+id/listOfHospitals"
+            tools:ignore="MissingConstraints" />
     <ListView
         android:id="@+id/listOfHospitals"
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="130dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="106dp"
-        android:layout_marginLeft="106dp"
-        android:layout_marginEnd="106dp"
-        android:layout_marginRight="106dp"
-        android:layout_marginBottom="56dp"
-        android:onClick="onClickAddHospital"
-        android:text="@string/hospital_button1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-    <Spinner
-
-        android:id="@+id/filterSpinner"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/displayHospitals_filterTextView"
-        app:layout_constraintBottom_toTopOf="@+id/listOfHospitals"
-        tools:ignore="MissingConstraints" />
+            android:id="@+id/button2"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="100dp"
+            android:onClick="onClickAddHospital"
+            android:text="@string/hospital_button1"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

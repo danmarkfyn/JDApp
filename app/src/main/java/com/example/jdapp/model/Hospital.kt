@@ -1,6 +1,6 @@
 package com.example.jdapp.model
 
-data class Hospital(val number: Int,
+data class Hospital(
                     val name: String,
                     val city: String,
                     val description: String,

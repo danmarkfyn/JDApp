@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import com.example.jdapp.model.Hospital
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -24,8 +25,10 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var nameEditText: TextView
     private lateinit var descriptionEditText: TextView
+    private lateinit var cityEditText: TextView
     private var hospitalName = ""
     private var hospitalDescription = ""
+    private var hospitalCity = ""
     private val lat = 55.6
     private val long = 10.1
 
@@ -35,6 +38,7 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
 
         nameEditText = findViewById(R.id.addhospital_nameEditText)
         descriptionEditText = findViewById(R.id.addhospital_descriptionEditText)
+        cityEditText = findViewById(R.id.addhospital_cityEditText)
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -42,11 +46,12 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     //This function is used to add Hospital to the Firestore
-    private fun addHospital(myDB : FirebaseFirestore, name: String, description: String,
+    private fun addHospital(myDB : FirebaseFirestore, name: String, description: String, city: String,
                     x_coord: Double, y_coord: Double) {
 
         val hospital = hashMapOf(
             "name" to name,
+            "city" to city,
             "description" to description,
             "x_coord" to x_coord,
             "y_coord" to y_coord
@@ -81,7 +86,7 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
 
     //Function for submit button in AddHospitalActivity
     fun onClickSubmit(view: View) {
-        //Checking if saving conditions are met
+        //Checking if saving conditions are met (all fields are filled)
         addHospital_submitButton.setOnClickListener {
             if(nameEditText.text.toString().trim().isEmpty()) {
                 val builder = AlertDialog.Builder(this)
@@ -97,17 +102,28 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
                 val dialog: AlertDialog = builder.create()
                 dialog.show()
 
-            } else {
+            } else if(cityEditText.text.toString().trim().isEmpty()){
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle(R.string.alert_warningTitle)
+                builder.setMessage(R.string.alert_emptyHospitalCityField)
+                val dialog: AlertDialog = builder.create()
+                dialog.show()
+
+            }else {
+
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle(R.string.alert_warningTitle)
                 builder.setMessage(R.string.alert_saveHospitalMessage)
 
                 builder.setPositiveButton(R.string.alert_positiveButton){dialog, which ->
-                    hospitalName = nameEditText.text.toString()
-                    hospitalDescription = descriptionEditText.text.toString()
+                    hospitalName = nameEditText.text.toString().trim()
+                    hospitalDescription = descriptionEditText.text.toString().trim()
+                    hospitalCity = cityEditText.text.toString().trim()
+
                     val intent = Intent(this, DisplayHospitalsActivity::class.java)
                     startActivity(intent)
-                    addHospital(myDB,hospitalName,hospitalDescription, lat,long)
+
+                    addHospital(myDB, hospitalName, hospitalDescription, hospitalCity, lat, long)
                     finish()
                 }
 

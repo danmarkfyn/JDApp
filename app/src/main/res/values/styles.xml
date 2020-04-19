@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -9,6 +8,4 @@
         <item name="android:windowBackground">@drawable/unique_bg_1</item>
         <item name="android:buttonStyle">@style/SkyButton</item>
     </style>
-
-
 </resources>
