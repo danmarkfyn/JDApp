@@ -5,6 +5,7 @@
     <string name="main_button2">About</string>
     <string name="hospital_button1">Add Hospital</string>
     <string name="addHospitalActivity_submitButton">Submit</string>
+    <string name="addHospitalActivity_searchButton">Search</string>
     <string name="addHospitalLayout_nameTextView">Hospital Name</string>
     <string name="addHospitalLayout_descriptionTextView">Description</string>
     <string name="displayHospitals_filterTextView">Filter</string>

@@ -2,20 +2,24 @@ package com.example.jdapp
 
 import android.content.ContentValues
 import android.content.Intent
+import android.location.Address
+import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_add_hospital.*
+import java.io.IOException
 
 class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -38,6 +42,7 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
 
     }
 
@@ -74,9 +79,29 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
     }
-    //TODO implement search method
-    fun searchHospitalLocation() {
 
+    fun onClickSearchHospitalLocation(view: View) {
+
+        lateinit var searchedLocation: String
+        searchedLocation = nameEditText.text.toString()
+
+        var hospitalAddressList: List<Address>? = null
+
+        if (searchedLocation == null || searchedLocation == "") {
+            Toast.makeText(applicationContext,"provide location",Toast.LENGTH_SHORT).show()
+        } else {
+            val geoCoder = Geocoder(this)
+            try {
+            hospitalAddressList = geoCoder.getFromLocationName(searchedLocation, 1)
+            } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        val address = hospitalAddressList!![0]
+        val latLng = LatLng(address.latitude, address.longitude)
+        gMap!!.addMarker(MarkerOptions().position(latLng).title(searchedLocation))
+        gMap!!.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+    }
     }
 
     //Function for submit button in AddHospitalActivity
@@ -108,6 +133,7 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
                     val intent = Intent(this, DisplayHospitalsActivity::class.java)
                     startActivity(intent)
                     addHospital(myDB,hospitalName,hospitalDescription, lat,long)
+                    finish()
                 }
 
                 builder.setNegativeButton(R.string.alert_negativeButton){dialog, which ->
