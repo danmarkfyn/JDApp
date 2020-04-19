@@ -24,7 +24,7 @@
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="100dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="159dp"
         android:layout_marginLeft="159dp"
@@ -37,6 +37,7 @@
         android:background="@drawable/unique_btn_1"
         android:paddingRight="11dp"
         android:paddingLeft="11dp"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,17 +45,17 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="100dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="159dp"
         android:layout_marginLeft="159dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="164dp"
         android:layout_marginRight="164dp"
-        android:background="@drawable/unique_btn_1"
         android:onClick="onClickAbout"
-        android:paddingLeft="11dp"
         android:paddingRight="11dp"
+        android:paddingLeft="11dp"
+        android:textColor="#FFFFFF"
         android:text="@string/main_button2"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"

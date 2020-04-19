@@ -21,16 +21,21 @@ class FilterAdapter(private val context: Activity, private val data: ArrayList<H
 
         // get layout items
         val titleText = rowView.findViewById(R.id.adapter_title) as TextView
-        val subtitleText = rowView.findViewById(R.id.adapter_description) as TextView
+        val descriptionText = rowView.findViewById(R.id.adapter_description) as TextView
+        val cityText = rowView.findViewById(R.id.adapter_city) as TextView
 
-        // get data items
+        // set text of titleText
         val title = data[position].number.toString() +". " + data[position].name
-        val description = data[position].description
-
-
-        // set layout item values = data item values
         titleText.text = title
-        subtitleText.text = description
+
+        // set text of descriptionText
+        val description = data[position].description
+        descriptionText.text = description
+
+        // set text of cityText
+        val city = ": " + data[position].city
+        cityText.append(city)
+
 
         Log.d(ContentValues.TAG, "Custom Adapter data values: " + title + " : " + description)
 

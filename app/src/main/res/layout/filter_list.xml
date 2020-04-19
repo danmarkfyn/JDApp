@@ -21,21 +21,38 @@
                 android:id="@+id/adapter_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="title"
+                android:text="@string/filterAdapter_title"
                 android:textStyle="bold"
                 android:layout_marginLeft="15dp"
                 android:layout_marginStart="15dp"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
-            <TextView
-                android:id="@+id/adapter_description"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="description"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                android:id="@+id/adapter_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filterAdapter_description"
                 android:layout_marginLeft="15dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
                 android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/adapter_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/filterAdapter_city"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:textSize="16sp"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
