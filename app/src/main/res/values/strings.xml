@@ -17,6 +17,7 @@
     <string name="addHospitalLayout_descriptionTextView">Description</string>
     <string name="addHospitalLayout_cityTextView">City</string>
     <string name="addHospitalLayout_seachTextView">Search</string>
+    <string name="addHospitalActivity_submitButton">Submit</string>
         <!--Alert-->
         <string name="alert_positiveButton">Yes</string>
         <string name="alert_negativeButton">No</string>
@@ -26,7 +27,6 @@
         <string name="alert_emptyHospitalDescriptionField">The hospital description cannot be empty!</string>
         <string name="alert_emptyHospitalCityField">The hospital city cannot be empty!</string>
         <string name="alert_saveHospitalMessage">Do you want to save the current hospital?</string>
-        <string name="addHospitalActivity_submitButton">Submit</string>
 
     <!--FilterList-->
     <string name="filterAdapter_title">Title</string>
