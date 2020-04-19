@@ -13,14 +13,14 @@ class AboutActivity : AppCompatActivity(){
 
     }
     fun onClickLink1 (view: View) {
-        val openURI = Intent(android.content.Intent.ACTION_VIEW)
+        val openURI = Intent(Intent.ACTION_VIEW)
         openURI.data = Uri.parse("https://www.linkedin.com/in/jakob-tøth")
 
         startActivity(openURI)
     }
 
     fun onClickLink2 (view: View) {
-        val openURI = Intent(android.content.Intent.ACTION_VIEW)
+        val openURI = Intent(Intent.ACTION_VIEW)
         openURI.data = Uri.parse("https://www.linkedin.com/in/dariusz-orasinski-689603177/")
         startActivity(openURI)
     }
