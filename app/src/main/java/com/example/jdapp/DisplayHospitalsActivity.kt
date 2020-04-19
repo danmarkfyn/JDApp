@@ -114,18 +114,17 @@ private fun getHospitals(myDB : FirebaseFirestore, listOfHospitals : ListView) {
                     val selectedHospitalName = selectedHospital?.name.toString()
                     val selectedHospitalDescription = selectedHospital?.description.toString()
                     val selectedHospitalCity = selectedHospital?.city.toString()
-                    //TODO pass geolocation for selected hospital
+                    val selectedHospitalLat = selectedHospital?.x_coord.toString()
+                    val selectedHospitalLong = selectedHospital?.y_coord.toString()
 
                     //Intent for HospitalDetailsActivity
                     val intent = Intent(this, HospitalDetailsActivity::class.java)
                         intent.putExtra("HospitalName", selectedHospitalName)
                         intent.putExtra("HospitalDescription", selectedHospitalDescription)
                         intent.putExtra("HospitalCity", selectedHospitalCity)
+                        intent.putExtra("HospitalLat", selectedHospitalLat)
+                        intent.putExtra("HospitalLong", selectedHospitalLong)
                         startActivity(intent)
-
-
-                    //intent.putExtra("HospitalName", selectedHospital.toString())
-
                 }
             }
             .addOnFailureListener { e ->

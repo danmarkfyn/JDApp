@@ -11,33 +11,43 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class HospitalDetailsActivity : AppCompatActivity(),  OnMapReadyCallback {
 
+    //Init values
     private var gMap: GoogleMap? = null
-    //TODO fix map location
-    private var hospitalLat = 55.384035
-    private var hospitalLong = 10.368267
+    private var hospitalLat = 0.0
+    private var hospitalLong = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hospitaldetails)
-        
+
+        //Getting data from intent extras
         val extras = intent.extras ?: return
         val selectedHospitalName = extras.getString("HospitalName")
         val selectedHospitalDescription = extras.getString("HospitalDescription")
         val selectedHospitalCity = extras.getString("HospitalCity")
+        val selectedHospitalLat = extras.getString("HospitalLat")
+        val selectedHospitalLong = extras.getString("HospitalLong")
 
+        //Passing data from intent to layout elements
         val textViewName = findViewById<TextView>(R.id.hospitalDetails_hospitalName)
         textViewName.text = selectedHospitalName
         val textViewDescription = findViewById<TextView>(R.id.hospitalDetails_hospitalDescription)
         textViewDescription.text = selectedHospitalDescription
         val textViewCity = findViewById<TextView>(R.id.hospitalDetails_hospitalCity)
         textViewCity.text = selectedHospitalCity
+        hospitalLat = selectedHospitalLat?.toDouble()!!
+        hospitalLong = selectedHospitalLong?.toDouble()!!
 
         //Map fragement for hospital location
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+        mapFragment.getMapAsync{
+            gMap = it
+            setUpMap(gMap!!)
+        }
 
     }
 
+    //Creating marker and showing hospital location
     override fun onMapReady(map: GoogleMap?) {
         gMap = map
         val hospitalPosition = com.google.android.gms.maps.model.LatLng(hospitalLat, hospitalLong)
@@ -50,11 +60,11 @@ class HospitalDetailsActivity : AppCompatActivity(),  OnMapReadyCallback {
         }
     }
 
-    //Used to specifying map type
+    //Specifying map type and zoom enabling
     private fun setUpMap(map: GoogleMap) {
         map.uiSettings.setZoomControlsEnabled(true)
         map.mapType = GoogleMap.MAP_TYPE_HYBRID
-
+        onMapReady(gMap)
     }
 
 }
