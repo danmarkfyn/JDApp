@@ -1,9 +1,12 @@
 package com.example.jdapp
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.ContentValues
 import android.content.Intent
 import android.location.Address
 import android.location.Geocoder
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +14,6 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.jdapp.model.Hospital
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -44,9 +46,11 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
         descriptionEditText = findViewById(R.id.addhospital_descriptionEditText)
         cityEditText = findViewById(R.id.addhospital_cityEditText)
 
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map1) as SupportMapFragment
+        mapFragment.getMapAsync{
+            gMap = it
+            setUpMap(gMap!!)
+        }
     }
 
     //This function is used to add Hospital to the Firestore
@@ -70,8 +74,8 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
             }
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        gMap = googleMap
+    override fun onMapReady(map: GoogleMap) {
+        gMap = map
 
         val hospitalPosition = com.google.android.gms.maps.model.LatLng(lat, long)
         val hospitalMarker: MarkerOptions = MarkerOptions().position(hospitalPosition).draggable(true)
@@ -81,7 +85,12 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
             it!!.addMarker(hospitalMarker)
             it.animateCamera(CameraUpdateFactory.newLatLngZoom(hospitalPosition, zoomLevel))
         }
+    }
 
+    private fun setUpMap(map: GoogleMap) {
+        map.uiSettings.setZoomControlsEnabled(true)
+        map.mapType = GoogleMap.MAP_TYPE_HYBRID
+        //onMapReady(gMap)
     }
 
     fun onClickSearchHospitalLocation(view: View) {
@@ -149,13 +158,17 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
                     addHospital(myDB, hospitalName, hospitalDescription, hospitalCity, lat, long)
                     finish()
                 }
-
+                //Clearing input fields when user click negative button 
                 builder.setNegativeButton(R.string.alert_negativeButton){dialog, which ->
-                    //TODO Clean textfields
+                    nameEditText.text = ""
+                    descriptionEditText.text = ""
+                    cityEditText.text = ""
                 }
 
                 builder.setNeutralButton(R.string.alert_neutralButton){dialog, which ->
-                    //TODO
+                    val intent = Intent(this, DisplayHospitalsActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
                 val dialog: AlertDialog = builder.create()
                 dialog.show()
