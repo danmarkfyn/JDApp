@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
@@ -17,16 +17,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        FirebaseMessaging.getInstance().subscribeToTopic("notifications")
-            .addOnCompleteListener { task ->
 
-                Log.d(ContentValues.TAG, "Subscribed")
-                if (!task.isSuccessful) {
-
-                    Log.d(ContentValues.TAG, "Failed to subscribe")
-                }
-            }
-
+        setupFBMessaging()
     }
 
     fun onClickHospital(view: View) {
@@ -37,5 +29,21 @@ class MainActivity : AppCompatActivity() {
     fun onClickAbout(view: View) {
         val intent = Intent(this, AboutActivity::class.java)
         startActivity(intent)
+    }
+
+    /**
+     * used to set up FirebaseMessaging and subscribe to entityAdded
+     */
+    private fun setupFBMessaging() {
+        FirebaseMessaging.getInstance().isAutoInitEnabled = true
+        FirebaseMessaging.getInstance().subscribeToTopic("entityAdded")
+            .addOnCompleteListener { task ->
+                val token = FirebaseInstanceId.getInstance();
+                Log.d(ContentValues.TAG, "Token used for subscription" + token)
+                if (!task.isSuccessful) {
+
+                    Log.d(ContentValues.TAG, "Failed to subscribe")
+                }
+            }
     }
 }
