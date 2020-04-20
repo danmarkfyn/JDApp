@@ -23,7 +23,7 @@ class DisplayHospitalsActivity : AppCompatActivity() {
     private var selected = ""
 
 
-    override fun onCreate(savedInstanceState : Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_displayhospitals)
 
@@ -37,21 +37,33 @@ class DisplayHospitalsActivity : AppCompatActivity() {
         // sets up ArrayAdapter to fill spinner with array entities
         val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, types)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
-            filterSpinner.adapter = arrayAdapter
+        filterSpinner.adapter = arrayAdapter
 
-            // listens to interactions with spinner
-            filterSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        // listens to interactions with spinner
+        filterSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    selected = ""
-                Log.d(ContentValues.TAG, "Spinner Not Selected " + filterSpinner.selectedItem.toString())
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                selected = ""
+                Log.d(
+                    ContentValues.TAG,
+                    "Spinner Not Selected " + filterSpinner.selectedItem.toString()
+                )
             }
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    hospitals.clear()
-                    selected = filterSpinner.selectedItem.toString()
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                hospitals.clear()
+                selected = filterSpinner.selectedItem.toString()
 
                 getHospitals(myDB, listOfHospitals)
-                Log.d(ContentValues.TAG, "Spinner Selected " + filterSpinner.selectedItem.toString())
+                Log.d(
+                    ContentValues.TAG,
+                    "Spinner Selected " + filterSpinner.selectedItem.toString()
+                )
             }
         }
     }
@@ -61,11 +73,11 @@ class DisplayHospitalsActivity : AppCompatActivity() {
         super.onRestart()
         hospitals.clear()
         getHospitals(myDB, listOfHospitals)
-        Log.d(ContentValues.TAG, this.localClassName+ " is restarted")
+        Log.d(ContentValues.TAG, this.localClassName + " is restarted")
     }
 
-private fun getHospitals(myDB : FirebaseFirestore, listOfHospitals : ListView) {
-    Log.d(ContentValues.TAG, "Getting Entities from DB")
+    private fun getHospitals(myDB: FirebaseFirestore, listOfHospitals: ListView) {
+        Log.d(ContentValues.TAG, "Getting Entities from DB")
         myDB.collection("Hospitals")
             .get()
             .addOnSuccessListener { result ->
@@ -85,14 +97,17 @@ private fun getHospitals(myDB : FirebaseFirestore, listOfHospitals : ListView) {
                     // dynamically reads the cities from the entities on the database for use in the spinner
                     if (document.getString("city") != null && !types.contains(type)) {
                         types.add(type.toLowerCase().trim())
-                        Log.d(ContentValues.TAG, "City " + type + " found on DB and was added as a filter option")
+                        Log.d(
+                            ContentValues.TAG,
+                            "City " + type + " found on DB and was added as a filter option"
+                        )
                     }
 
                     // shows all loaded cities if no filters applied (applied "No Filters" filter)
-                    if(selected == "No Filters"){
+                    if (selected == "No Filters") {
                         hospitals.add(h)
-                    }else{
-                        if(selected == h.city.trim().toLowerCase() && selected != "No Filters"){
+                    } else {
+                        if (selected == h.city.trim().toLowerCase() && selected != "No Filters") {
                             hospitals.add(h)
                             Log.d(ContentValues.TAG, "Added hospital to list according to filers ")
                         }
@@ -119,19 +134,20 @@ private fun getHospitals(myDB : FirebaseFirestore, listOfHospitals : ListView) {
 
                     //Intent for HospitalDetailsActivity
                     val intent = Intent(this, HospitalDetailsActivity::class.java)
-                        intent.putExtra("HospitalName", selectedHospitalName)
-                        intent.putExtra("HospitalDescription", selectedHospitalDescription)
-                        intent.putExtra("HospitalCity", selectedHospitalCity)
-                        intent.putExtra("HospitalLat", selectedHospitalLat)
-                        intent.putExtra("HospitalLong", selectedHospitalLong)
-                        startActivity(intent)
+                    intent.putExtra("HospitalName", selectedHospitalName)
+                    intent.putExtra("HospitalDescription", selectedHospitalDescription)
+                    intent.putExtra("HospitalCity", selectedHospitalCity)
+                    intent.putExtra("HospitalLat", selectedHospitalLat)
+                    intent.putExtra("HospitalLong", selectedHospitalLong)
+                    startActivity(intent)
                 }
             }
             .addOnFailureListener { e ->
                 Log.w(ContentValues.TAG, "Error: ", e)
             }
     }
-    fun onClickAddHospital (view : View) {
+
+    fun onClickAddHospital(view: View) {
         val intent = Intent(this, AddHospitalActivity::class.java)
         startActivity(intent)
     }

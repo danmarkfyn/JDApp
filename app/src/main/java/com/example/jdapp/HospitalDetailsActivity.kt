@@ -9,7 +9,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.MarkerOptions
 
-class HospitalDetailsActivity : AppCompatActivity(),  OnMapReadyCallback {
+class HospitalDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     //Init values
     private var gMap: GoogleMap? = null
@@ -40,7 +40,7 @@ class HospitalDetailsActivity : AppCompatActivity(),  OnMapReadyCallback {
 
         //Map fragement for hospital location
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync{
+        mapFragment.getMapAsync {
             gMap = it
             setUpMap(gMap!!)
         }
