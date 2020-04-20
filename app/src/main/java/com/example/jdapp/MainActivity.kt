@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
@@ -36,6 +35,11 @@ class MainActivity : AppCompatActivity() {
 
     fun onClickAbout(view: View) {
         val intent = Intent(this, AboutActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun onClickSettings(view: View) {
+        val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
     }
 }
