@@ -1,9 +1,12 @@
 package com.example.jdapp
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.ContentValues
 import android.content.Intent
 import android.location.Address
 import android.location.Geocoder
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +14,6 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.jdapp.model.Hospital
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -44,16 +46,16 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
         descriptionEditText = findViewById(R.id.addhospital_descriptionEditText)
         cityEditText = findViewById(R.id.addhospital_cityEditText)
 
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
-
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map1) as SupportMapFragment
+        mapFragment.getMapAsync{
+            gMap = it
+            setUpMap(gMap!!)
+        }
     }
 
     //This function is used to add Hospital to the Firestore
-    private fun addHospital(
-        myDB: FirebaseFirestore, name: String, description: String, city: String,
-        x_coord: Double, y_coord: Double
-    ) {
+    private fun addHospital(myDB : FirebaseFirestore, name: String, description: String, city: String,
+                    x_coord: Double, y_coord: Double) {
 
         val hospital = hashMapOf(
             "name" to name,
@@ -72,19 +74,23 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
             }
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        gMap = googleMap
+    override fun onMapReady(map: GoogleMap) {
+        gMap = map
 
-        val hospitalPosition = LatLng(lat, long)
-        val hospitalMarker: MarkerOptions =
-            MarkerOptions().position(hospitalPosition).draggable(true)
+        val hospitalPosition = com.google.android.gms.maps.model.LatLng(lat, long)
+        val hospitalMarker: MarkerOptions = MarkerOptions().position(hospitalPosition).draggable(true)
         val zoomLevel = 15.0f
 
         gMap.let {
             it!!.addMarker(hospitalMarker)
             it.animateCamera(CameraUpdateFactory.newLatLngZoom(hospitalPosition, zoomLevel))
         }
+    }
 
+    private fun setUpMap(map: GoogleMap) {
+        map.uiSettings.setZoomControlsEnabled(true)
+        map.mapType = GoogleMap.MAP_TYPE_HYBRID
+        //onMapReady(gMap)
     }
 
     fun onClickSearchHospitalLocation(view: View) {
@@ -95,41 +101,41 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
         var hospitalAddressList: List<Address>? = null
 
         if (searchedLocation == null || searchedLocation == "") {
-            Toast.makeText(applicationContext, "provide location", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext,"provide location",Toast.LENGTH_SHORT).show()
         } else {
             val geoCoder = Geocoder(this)
             try {
-                hospitalAddressList = geoCoder.getFromLocationName(searchedLocation, 1)
+            hospitalAddressList = geoCoder.getFromLocationName(searchedLocation, 1)
             } catch (e: IOException) {
-                e.printStackTrace()
-            }
-
-            val address = hospitalAddressList!![0]
-            val latLng = LatLng(address.latitude, address.longitude)
-            gMap!!.addMarker(MarkerOptions().position(latLng).title(searchedLocation))
-            gMap!!.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+            e.printStackTrace()
         }
+
+        val address = hospitalAddressList!![0]
+        val latLng = LatLng(address.latitude, address.longitude)
+        gMap!!.addMarker(MarkerOptions().position(latLng).title(searchedLocation))
+        gMap!!.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+    }
     }
 
     //Function for submit button in AddHospitalActivity
     fun onClickSubmit(view: View) {
         //Checking if saving conditions are met (all fields are filled)
         addHospital_submitButton.setOnClickListener {
-            if (nameEditText.text.toString().trim().isEmpty()) {
+            if(nameEditText.text.toString().trim().isEmpty()) {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle(R.string.alert_warningTitle)
                 builder.setMessage(R.string.alert_emptyHospitalNameField)
                 val dialog: AlertDialog = builder.create()
                 dialog.show()
 
-            } else if (descriptionEditText.text.toString().trim().isEmpty()) {
+            } else if(descriptionEditText.text.toString().trim().isEmpty()){
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle(R.string.alert_warningTitle)
                 builder.setMessage(R.string.alert_emptyHospitalDescriptionField)
                 val dialog: AlertDialog = builder.create()
                 dialog.show()
 
-            } else if (cityEditText.text.toString().trim().isEmpty()) {
+            } else if(cityEditText.text.toString().trim().isEmpty()){
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle(R.string.alert_warningTitle)
                 builder.setMessage(R.string.alert_emptyHospitalCityField)
@@ -141,7 +147,7 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
                 builder.setTitle(R.string.alert_warningTitle)
                 builder.setMessage(R.string.alert_saveHospitalMessage)
 
-                builder.setPositiveButton(R.string.alert_positiveButton) { dialog, which ->
+                builder.setPositiveButton(R.string.alert_positiveButton){dialog, which ->
                     hospitalName = nameEditText.text.toString().trim()
                     hospitalDescription = descriptionEditText.text.toString().trim()
                     hospitalCity = cityEditText.text.toString().trim()
@@ -152,13 +158,17 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
                     addHospital(myDB, hospitalName, hospitalDescription, hospitalCity, lat, long)
                     finish()
                 }
-
-                builder.setNegativeButton(R.string.alert_negativeButton) { dialog, which ->
-                    //TODO Clean textfields
+                //Clearing input fields when user click negative button 
+                builder.setNegativeButton(R.string.alert_negativeButton){dialog, which ->
+                    nameEditText.text = ""
+                    descriptionEditText.text = ""
+                    cityEditText.text = ""
                 }
 
-                builder.setNeutralButton(R.string.alert_neutralButton) { dialog, which ->
-                    //TODO
+                builder.setNeutralButton(R.string.alert_neutralButton){dialog, which ->
+                    val intent = Intent(this, DisplayHospitalsActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
                 val dialog: AlertDialog = builder.create()
                 dialog.show()

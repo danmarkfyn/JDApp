@@ -7,7 +7,7 @@
     tools:context=".AddHospitalActivity">
 
     <fragment
-        android:id="@+id/map"
+        android:id="@+id/map1"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -16,6 +16,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".HospitalDetailsActivity" />
+
+    <EditText
+        android:id="@+id/inputSearch"
+        android:hint="@string/addHospitalLayout_searchInput"
+        android:inputType="text"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <Button
         android:id="@+id/searchButton"
