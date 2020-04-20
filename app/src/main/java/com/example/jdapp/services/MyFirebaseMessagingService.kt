@@ -1,6 +1,5 @@
 package com.example.jdapp.services
 
-import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
@@ -14,9 +13,9 @@ import com.example.jdapp.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
-class MyFirebaseMessagingService: FirebaseMessagingService() {
+class MyFirebaseMessagingService : FirebaseMessagingService() {
 
-    val TAG ="MyFirebaseInstantMes"
+    val TAG = "MyFirebaseInstantMes"
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
@@ -25,8 +24,11 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
         remoteMessage?.data?.isEmpty()?.let {
             Log.d(TAG, "Message data payload: " + remoteMessage.data)
 
-            if(!remoteMessage.data.isNullOrEmpty()) {
-                showNotification(remoteMessage.notification?.title, remoteMessage.notification?.body)
+            if (!remoteMessage.data.isNullOrEmpty()) {
+                showNotification(
+                    remoteMessage.notification?.title,
+                    remoteMessage.notification?.body
+                )
             }
         }
 
@@ -40,6 +42,7 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
         val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
         //Building notification builder for FirebaseMessagingService
         val notificationBuilder = NotificationCompat.Builder(this)
             .setSmallIcon(R.mipmap.ic_launcher)
@@ -49,7 +52,8 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
             .setSound(soundUri)
             .setContentIntent(pendingIntent)
 
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(0, notificationBuilder.build())
     }
 }
