@@ -64,7 +64,7 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
-    fun getLocation(input: String) {
+    private fun getLocation(input: String) {
 
         lateinit var location: String
         location = input
@@ -74,17 +74,23 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
         try {
             val geocoder = Geocoder(this)
             searchAddressList = geocoder.getFromLocationName(location, 5)
+
         } catch (e: IOException) {
             e.printStackTrace()
         }
 
-        val address = searchAddressList!![0]
-        val latLng = LatLng(address.latitude, address.longitude)
-        lat = address.latitude
-        long = address.longitude
-        gMap!!.addMarker(MarkerOptions().position(latLng).title(location))
-        gMap!!.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+        if(!searchAddressList.isNullOrEmpty()) {
 
+            val address = searchAddressList!![0]
+            val latLng = LatLng(address.latitude, address.longitude)
+            lat = address.latitude
+            long = address.longitude
+            cityEditText.text = address.locality.toString()
+            gMap!!.addMarker(MarkerOptions().position(latLng).title(location))
+            gMap!!.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+        } else {
+            Toast.makeText(this, "Couldn't find any location with name " + input, Toast.LENGTH_LONG).show()
+        }
     }
 
     //This function is used to add Hospital to the Firestore
@@ -125,30 +131,6 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
         map.uiSettings.setZoomControlsEnabled(true)
         map.mapType = GoogleMap.MAP_TYPE_HYBRID
         onMapReady(gMap)
-    }
-
-    fun onClickSearchHospitalLocation(view: View) {
-
-        lateinit var searchedLocation: String
-        searchedLocation = nameEditText.text.toString()
-
-        var hospitalAddressList: List<Address>? = null
-
-        if (searchedLocation == null || searchedLocation == "") {
-            Toast.makeText(applicationContext,"provide location",Toast.LENGTH_SHORT).show()
-        } else {
-            val geoCoder = Geocoder(this)
-            try {
-            hospitalAddressList = geoCoder.getFromLocationName(searchedLocation, 1)
-            } catch (e: IOException) {
-            e.printStackTrace()
-        }
-
-        val address = hospitalAddressList!![0]
-        val latLng = LatLng(address.latitude, address.longitude)
-        gMap!!.addMarker(MarkerOptions().position(latLng).title(searchedLocation))
-        gMap!!.animateCamera(CameraUpdateFactory.newLatLng(latLng))
-    }
     }
 
     //Function for submit button in AddHospitalActivity
