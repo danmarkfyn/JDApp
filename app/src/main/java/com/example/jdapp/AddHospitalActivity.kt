@@ -1,15 +1,13 @@
 package com.example.jdapp
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.ContentValues
 import android.content.Intent
 import android.location.Address
 import android.location.Geocoder
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -32,6 +30,8 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var nameEditText: TextView
     private lateinit var descriptionEditText: TextView
     private lateinit var cityEditText: TextView
+    private lateinit var inputSearch: TextView
+
     private var hospitalName = ""
     private var hospitalDescription = ""
     private var hospitalCity = ""
@@ -51,6 +51,21 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
             gMap = it
             setUpMap(gMap!!)
         }
+
+        inputSearch = findViewById(R.id.inputSearch)
+        inputSearch.setOnKeyListener(View.OnKeyListener { _, keyCode, keyEvent ->
+            if(keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_UP) {
+                getLocation(inputSearch.text.toString())
+                inputSearch.text = ""
+                return@OnKeyListener true
+            }
+            false
+        })
+
+    }
+
+    fun getLocation(input: String) {
+
     }
 
     //This function is used to add Hospital to the Firestore

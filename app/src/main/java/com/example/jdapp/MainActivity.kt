@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        FirebaseMessaging.getInstance().subscribeToTopic("notifications")
+        FirebaseMessaging.getInstance().subscribeToTopic("entityAdded")
             .addOnCompleteListener { task ->
 
                 Log.d(ContentValues.TAG, "Subscribed")
