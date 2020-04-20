@@ -35,8 +35,8 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
     private var hospitalName = ""
     private var hospitalDescription = ""
     private var hospitalCity = ""
-    private val lat = 55.6
-    private val long = 10.1
+    private var lat = 55.6
+    private var long = 10.1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +66,25 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
 
     fun getLocation(input: String) {
 
+        lateinit var location: String
+        location = input
+
+        var searchAddressList: List<Address>? = null
+
+        try {
+            val geocoder = Geocoder(this)
+            searchAddressList = geocoder.getFromLocationName(location, 5)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        val address = searchAddressList!![0]
+        val latLng = LatLng(address.latitude, address.longitude)
+        lat = address.latitude
+        long = address.longitude
+        gMap!!.addMarker(MarkerOptions().position(latLng).title(location))
+        gMap!!.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+
     }
 
     //This function is used to add Hospital to the Firestore
@@ -89,10 +108,10 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
             }
     }
 
-    override fun onMapReady(map: GoogleMap) {
+    override fun onMapReady(map: GoogleMap?) {
         gMap = map
 
-        val hospitalPosition = com.google.android.gms.maps.model.LatLng(lat, long)
+        val hospitalPosition = LatLng(lat, long)
         val hospitalMarker: MarkerOptions = MarkerOptions().position(hospitalPosition).draggable(true)
         val zoomLevel = 15.0f
 
@@ -105,7 +124,7 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun setUpMap(map: GoogleMap) {
         map.uiSettings.setZoomControlsEnabled(true)
         map.mapType = GoogleMap.MAP_TYPE_HYBRID
-        //onMapReady(gMap)
+        onMapReady(gMap)
     }
 
     fun onClickSearchHospitalLocation(view: View) {
