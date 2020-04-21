@@ -29,7 +29,7 @@ class WeatherService(city: String) : AsyncTask<String, Void, String>() {
 
         val main = jsonObj.getJSONObject("main")
 
-        val temp = main.getString("temp")+"°C"
+        val temp = main.getString("temp") + "°C"
 
         Log.d(ContentValues.TAG, "Temp: " + temp)
         return temp

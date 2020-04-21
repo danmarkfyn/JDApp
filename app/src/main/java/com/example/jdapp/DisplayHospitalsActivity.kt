@@ -99,7 +99,7 @@ class DisplayHospitalsActivity : AppCompatActivity() {
 
                      */
                     val city = document.getString("city").toString()
-                    val temp = WeatherService (city).execute().get()
+                    val temp = WeatherService(city).execute().get()
 
 
                     // TODO implement GeoPoint https://stackoverflow.com/questions/53799346/how-to-convert-geopoint-in-firestore-to-latlng

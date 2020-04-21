@@ -10,9 +10,11 @@ import com.example.jdapp.R
 import com.example.jdapp.model.Hospital
 
 // custom adapter for filtered hospital ListView
-class FilterAdapter(private val context: Activity, private val data: ArrayList<Hospital>)
-    : ArrayAdapter<Hospital>(context,
-    R.layout.filter_list, data) {
+class FilterAdapter(private val context: Activity, private val data: ArrayList<Hospital>) :
+    ArrayAdapter<Hospital>(
+        context,
+        R.layout.filter_list, data
+    ) {
 
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
         val inflater = context.layoutInflater

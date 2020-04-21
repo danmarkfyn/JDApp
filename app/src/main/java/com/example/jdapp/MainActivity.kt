@@ -14,17 +14,10 @@ class MainActivity : AppCompatActivity() {
 
     // TODO layout naming convetion  https://jeroenmols.com/blog/2016/03/07/resourcenaming/
     // TODO in general https://kotlinlang.org/docs/reference/coding-conventions.html
-    // TODO fun explianations to all fun(ctions)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val weather = WeatherService ("Den Bosch")
-        Log.d(
-            ContentValues.TAG,
-            "City " + weather.execute() + " found on DB and was added as a filter option"
-        )
-
+        
         setupFBMessaging()
     }
 
