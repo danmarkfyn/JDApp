@@ -20,6 +20,14 @@
     <string name="addHospitalLayout_seachTextView">Søg</string>
     <string name="addHospitalActivity_submitButton">Submit</string>
     <string name="addHospitalLayout_searchInput">Søg Sygehus...</string>
+    <!--Settings-->
+    <string name="settingsLayout_changeLanguage">Sprog</string>
+
+    <string-array name="languageOptions">
+        <item>English</item>
+        <item>Dansk</item>
+        <item>Polski</item>
+    </string-array>
     <!--Alert-->
     <string name="alert_positiveButton">Ja</string>
     <string name="alert_negativeButton">Nej</string>
