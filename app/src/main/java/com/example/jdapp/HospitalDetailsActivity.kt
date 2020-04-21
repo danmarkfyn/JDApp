@@ -10,6 +10,11 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.MarkerOptions
 
+/**
+ * This class is used to display more details about hospital selected in DisplayHospitalsActivity
+ * @param hospitalLat: Used by GoogleMap to display hospitals latitude
+ * @param hospitalLong: Used by GoogleMap to display hospital longitude
+ */
 class HospitalDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private var gMap: GoogleMap? = null
@@ -52,7 +57,7 @@ class HospitalDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
-    //Creating marker and showing hospital location
+    //Called when the map is ready
     override fun onMapReady(map: GoogleMap?) {
         gMap = map
         val hospitalPosition = com.google.android.gms.maps.model.LatLng(hospitalLat, hospitalLong)

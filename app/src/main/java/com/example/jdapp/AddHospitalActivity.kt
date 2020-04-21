@@ -1,12 +1,9 @@
 package com.example.jdapp
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.ContentValues
 import android.content.Intent
 import android.location.Address
 import android.location.Geocoder
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -25,8 +22,17 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_add_hospital.*
 import java.io.IOException
 
-class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
+/**
+ * Parameters for AddHospitalActivity
+ * @param hospitalName: Defines hospital name given by user
+ * @param hospitalDescription: Defines hospital description given by user
+ * @param hospitalCity: Defines location city for the hospital
+ * @param lat: Location latititude for the hospital
+ * @param long: Location logitude for the hospital
+ */
 
+class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
+    //Init variables
     private val myDB = FirebaseFirestore.getInstance()
     private var gMap: GoogleMap? = null
 
@@ -41,6 +47,7 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
     private var lat = 55.6
     private var long = 10.1
 
+    //onCreate method for AddHospital Activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_hospital)
@@ -49,12 +56,13 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
         descriptionEditText = findViewById(R.id.addhospital_descriptionEditText)
         cityEditText = findViewById(R.id.addhospital_cityEditText)
 
+        //Creates map fragement and calling setUpMap() for settup for the map
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map1) as SupportMapFragment
         mapFragment.getMapAsync{
             gMap = it
             setUpMap(gMap!!)
         }
-
+        //A keyListener for the inputSearch edit text. Used to read user input and parsing it to the getLocation() function
         inputSearch = findViewById(R.id.inputSearch)
         inputSearch.setOnKeyListener(View.OnKeyListener { _, keyCode, keyEvent ->
             if(keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_UP) {
@@ -66,7 +74,7 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
             false
         })
     }
-
+    //Using geocoding to get the location based on the user input
     private fun getLocation(input: String) {
         lateinit var location: String
         location = input
@@ -122,7 +130,7 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
                 Log.w(ContentValues.TAG, "Error: ", e)
             }
     }
-
+    //Called when the map is ready
     override fun onMapReady(map: GoogleMap?) {
         gMap = map
 
@@ -136,6 +144,7 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    //Function used to setting up the map
     private fun setUpMap(map: GoogleMap) {
         map.uiSettings.setZoomControlsEnabled(true)
         map.mapType = GoogleMap.MAP_TYPE_HYBRID
@@ -168,6 +177,7 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
                 dialog.show()
 
             } else {
+                //When conditons are met
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle(R.string.alert_warningTitle)
                 builder.setMessage(R.string.alert_saveHospitalMessage)
@@ -179,7 +189,7 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
 
                     val intent = Intent(this, DisplayHospitalsActivity::class.java)
                     startActivity(intent)
-
+                    //Saving hospital data by addHospital() function
                     addHospital(myDB, hospitalName, hospitalDescription, hospitalCity, lat, long)
                     finish()
                 }
@@ -189,7 +199,7 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
                     descriptionEditText.text = ""
                     cityEditText.text = ""
                 }
-
+                //Sending user back to the DisplayHospitalActivity when cancel
                 builder.setNeutralButton(R.string.alert_neutralButton){dialog, which ->
                     val intent = Intent(this, DisplayHospitalsActivity::class.java)
                     startActivity(intent)
