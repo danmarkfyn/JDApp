@@ -7,7 +7,6 @@ package com.example.jdapp.model
  * @Param description a short description attached to the hospital. A String
  * @param xCoord the x coordinate for the geo location of the hospital. A Double
  * @param xCoord the y coordinate for the geo location of the hospital. A Double
- * @param temp the temperature at the location. A String
  */
 
 data class Hospital(
@@ -15,7 +14,6 @@ data class Hospital(
     val city: String,
     val description: String,
     val xCoord: Double,
-    val yCoord: Double,
-    val temp: String
+    val yCoord: Double
 ) {
 }

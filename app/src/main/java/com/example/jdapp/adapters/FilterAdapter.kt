@@ -31,7 +31,6 @@ class FilterAdapter(private val context: Activity, private val data: ArrayList<H
         val titleText = rowView.findViewById(R.id.adapter_title) as TextView
         val descriptionText = rowView.findViewById(R.id.adapter_description) as TextView
         val cityText = rowView.findViewById(R.id.adapter_city) as TextView
-        val tempText = rowView.findViewById(R.id.adapter_temp) as TextView
 
         // set text of titleText
         val title = number + ". " + data[position].name
@@ -45,9 +44,6 @@ class FilterAdapter(private val context: Activity, private val data: ArrayList<H
         val city = ": " + data[position].city
         cityText.append(city)
 
-        // set text of tempText
-        val temp = ": " + data[position].temp
-        tempText.append(temp)
 
         return rowView
     }

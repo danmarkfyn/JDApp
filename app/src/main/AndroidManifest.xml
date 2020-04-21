@@ -11,7 +11,6 @@
         android:roundIcon="@mipmap/jdapp_round_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SettingsActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

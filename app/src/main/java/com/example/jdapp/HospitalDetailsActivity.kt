@@ -3,6 +3,7 @@ package com.example.jdapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import com.example.jdapp.services.WeatherService
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -27,13 +28,18 @@ class HospitalDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
         val selectedHospitalLat = extras.getString("HospitalLat")
         val selectedHospitalLong = extras.getString("HospitalLong")
 
+        // using WeatherService to get temperature based on the city
+        val temp = WeatherService(selectedHospitalCity.toString()).execute().get()
+
         //Passing data from intent to layout elements
         val textViewName = findViewById<TextView>(R.id.hospitalDetails_hospitalName)
-        textViewName.text = selectedHospitalName
+        textViewName.text = getString(R.string.hospitalDetailsActivity_name) + selectedHospitalName
         val textViewDescription = findViewById<TextView>(R.id.hospitalDetails_hospitalDescription)
-        textViewDescription.text = selectedHospitalDescription
+        textViewDescription.text = getString(R.string.hospitalDetailsActivity_description) + selectedHospitalDescription
         val textViewCity = findViewById<TextView>(R.id.hospitalDetails_hospitalCity)
-        textViewCity.text = selectedHospitalCity
+        textViewCity.text = getString(R.string.hospitalDetailsActivity_city) + selectedHospitalCity
+        val textViewTemp = findViewById<TextView>(R.id.hospitalDetails_hospitalTemp)
+        textViewTemp.text = getString(R.string.hospitalDetailsActivity_temperature) + temp
         hospitalLat = selectedHospitalLat?.toDouble()!!
         hospitalLong = selectedHospitalLong?.toDouble()!!
 

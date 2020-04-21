@@ -38,7 +38,7 @@ class DisplayHospitalsActivity : AppCompatActivity() {
 
         types.add("No Filters")
         // getting the ListView
-        var listOfHospitals = findViewById<ListView>(R.id.listOfHospitals)
+        val listOfHospitals = findViewById<ListView>(R.id.listOfHospitals)
         // getting the spinner for the filters
         val filterSpinner: Spinner = findViewById(R.id.filterSpinner)
 
@@ -99,18 +99,16 @@ class DisplayHospitalsActivity : AppCompatActivity() {
                     // of Hospital objects for use on the client
 
                     val city = document.getString("city").toString()
-                    val temp = WeatherService(city).execute().get()
                     val h = Hospital(
                         document.getString("name").toString(),
                         city,
                         document.getString("description").toString(),
                         document.get("x_coord").toString().toDouble(),
-                        document.get("y_coord").toString().toDouble(),
-                        temp
+                        document.get("y_coord").toString().toDouble()
                     )
 
                     // reads cities & removes formatting to allow for filtering
-                    var type = document.getString("city").toString().toLowerCase().trim()
+                    val type = document.getString("city").toString().toLowerCase().trim()
 
 
                     // dynamically reads the cities from the entities on the database for use in the spinner as a filter option

@@ -19,7 +19,7 @@
     <string name="addHospitalLayout_cityTextView">By</string>
     <string name="addHospitalLayout_seachTextView">Søg</string>
     <string name="addHospitalActivity_submitButton">Submit</string>
-    <string name="addHospitalLayout_searchInput">Søg Sygehus...</string>
+    <string name="addHospitalLayout_searchInput">Søg Sygehus</string>
     <!--Alert-->
     <string name="alert_positiveButton">Ja</string>
     <string name="alert_negativeButton">Nej</string>
@@ -30,9 +30,16 @@
     <string name="alert_emptyHospitalCityField">Hospitalets by kan ikke være tomt!</string>
     <string name="alert_saveHospitalMessage">Vil du gemme det nuværende hospital?</string>
 
+    <!--Details-->
+    <string name="hospitalDetailsActivity_name">Name: </string>
+    <string name="hospitalDetailsActivity_description">Description: </string>
+    <string name="hospitalDetailsActivity_city">City: </string>
+    <string name="hospitalDetailsActivity_temperature">temperature: </string>
+
     <!--FilterList-->
     <string name="filterAdapter_title">Titel</string>
     <string name="filterAdapter_description">Beskrivelse</string>
     <string name="filterAdapter_city">By</string>
+    <string name="filterAdapter_temp">Temperatur</string>
 
 </resources>
