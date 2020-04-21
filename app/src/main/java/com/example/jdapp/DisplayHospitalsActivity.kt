@@ -24,7 +24,6 @@ class DisplayHospitalsActivity : AppCompatActivity() {
     private val myDB = FirebaseFirestore.getInstance()
     private var selected = ""
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_displayhospitals)
@@ -81,32 +80,16 @@ class DisplayHospitalsActivity : AppCompatActivity() {
     private fun getHospitals(myDB: FirebaseFirestore, listOfHospitals: ListView) {
         Log.d(ContentValues.TAG, "Getting Entities from DB")
 
-
-
         myDB.collection("Hospitals")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
 
-
-                    // get values from DB
-                    /*
-                    val name = document.getString("name").toString()
-                    val city = document.getString("city").toString()
-                    val description = document.getString("description").toString()
-                    val xCoord : Double = document.getString("x_coord").toString().toDouble()
-                    val yCoord : Double = document.getString("y_coord").toString().toDouble()
-
-                     */
                     val city = document.getString("city").toString()
                     val temp = WeatherService(city).execute().get()
-
-
-                    // TODO implement GeoPoint https://stackoverflow.com/questions/53799346/how-to-convert-geopoint-in-firestore-to-latlng
-
                     val h = Hospital(
+                        document.getString("name").toString(),
                         city,
-                        document.getString("city").toString(),
                         document.getString("description").toString(),
                         document.get("x_coord").toString().toDouble(),
                         document.get("y_coord").toString().toDouble(),

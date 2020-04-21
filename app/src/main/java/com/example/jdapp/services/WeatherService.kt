@@ -15,24 +15,30 @@ class WeatherService(city: String) : AsyncTask<String, Void, String>() {
 
     override fun doInBackground(vararg params: String): String {
         var result: String
+        Log.d(ContentValues.TAG, "Running URL Call")
         try {
             result =
                 URL("https://api.openweathermap.org/data/2.5/weather?q=$city&units=metric&appid=$API").readText(
                     Charsets.UTF_8
                 )
         } catch (e: Exception) {
-
             Log.d(ContentValues.TAG, "Error while trying to get weather: " + e)
-            result = "No Weather Data"
+            result =
+                "No Weather Data"
         }
-        val jsonObj = JSONObject(result)
+        try {
+            val jsonObj = JSONObject(result)
 
-        val main = jsonObj.getJSONObject("main")
+            val main = jsonObj.getJSONObject("main")
 
-        val temp = main.getString("temp") + "°C"
+            val temp = main.getString("temp") + "°C"
 
-        Log.d(ContentValues.TAG, "Temp: " + temp)
-        return temp
+            Log.d(ContentValues.TAG, "Temp: " + temp)
+            return temp
+        } catch (e: Exception){
+            Log.d(ContentValues.TAG, "Error: " + e)
+        }
+        return "n/a"
     }
 }
 
