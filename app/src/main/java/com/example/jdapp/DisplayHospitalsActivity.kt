@@ -12,7 +12,9 @@ import android.widget.ListView
 import android.widget.Spinner
 import com.example.jdapp.adapters.FilterAdapter
 import com.example.jdapp.model.Hospital
+import com.example.jdapp.services.WeatherService
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.GeoPoint
 import kotlinx.android.synthetic.main.activity_displayhospitals.*
 
 class DisplayHospitalsActivity : AppCompatActivity() {
@@ -78,16 +80,37 @@ class DisplayHospitalsActivity : AppCompatActivity() {
 
     private fun getHospitals(myDB: FirebaseFirestore, listOfHospitals: ListView) {
         Log.d(ContentValues.TAG, "Getting Entities from DB")
+
+
+
         myDB.collection("Hospitals")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
+
+
+                    // get values from DB
+                    /*
+                    val name = document.getString("name").toString()
+                    val city = document.getString("city").toString()
+                    val description = document.getString("description").toString()
+                    val xCoord : Double = document.getString("x_coord").toString().toDouble()
+                    val yCoord : Double = document.getString("y_coord").toString().toDouble()
+
+                     */
+                    val city = document.getString("city").toString()
+                    val temp = WeatherService (city).execute().get()
+
+
+                    // TODO implement GeoPoint https://stackoverflow.com/questions/53799346/how-to-convert-geopoint-in-firestore-to-latlng
+
                     val h = Hospital(
-                        document.getString("name").toString(),
+                        city,
                         document.getString("city").toString(),
                         document.getString("description").toString(),
                         document.get("x_coord").toString().toDouble(),
-                        document.get("y_coord").toString().toDouble()
+                        document.get("y_coord").toString().toDouble(),
+                        temp
                     )
 
                     // reads cities & removes formatting to allow for filtering
@@ -129,8 +152,8 @@ class DisplayHospitalsActivity : AppCompatActivity() {
                     val selectedHospitalName = selectedHospital?.name.toString()
                     val selectedHospitalDescription = selectedHospital?.description.toString()
                     val selectedHospitalCity = selectedHospital?.city.toString()
-                    val selectedHospitalLat = selectedHospital?.x_coord.toString()
-                    val selectedHospitalLong = selectedHospital?.y_coord.toString()
+                    val selectedHospitalLat = selectedHospital?.xCoord.toString()
+                    val selectedHospitalLong = selectedHospital?.yCoord.toString()
 
                     //Intent for HospitalDetailsActivity
                     val intent = Intent(this, HospitalDetailsActivity::class.java)
