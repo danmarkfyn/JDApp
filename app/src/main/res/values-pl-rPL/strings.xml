@@ -20,12 +20,6 @@
     <string name="addHospitalLayout_seachTextView">Szukaj</string>
     <string name="addHospitalActivity_submitButton">Zapisz</string>
     <string name="addHospitalLayout_searchInput">Szukaj szpitala...</string>
-    <string name="addHospitalLayout_nameTextView">Hospital Name</string>
-    <string name="addHospitalLayout_descriptionTextView">Description</string>
-    <string name="addHospitalLayout_cityTextView">City</string>
-    <string name="addHospitalLayout_seachTextView">Search</string>
-    <string name="addHospitalActivity_submitButton">Submit</string>
-    <string name="addHospitalLayout_searchInput">Search hospital</string>
     <!--Alert-->
     <string name="alert_positiveButton">Tak</string>
     <string name="alert_negativeButton">Nie</string>
@@ -47,8 +41,5 @@
     <string name="filterAdapter_title">Tytuł</string>
     <string name="filterAdapter_description">Opis</string>
     <string name="filterAdapter_city">Miasto</string>
-    <string name="filterAdapter_title">Title</string>
-    <string name="filterAdapter_description">Description</string>
-    <string name="filterAdapter_city">City</string>
     <string name="filterAdapter_temp">Temperatura</string>
 </resources>
