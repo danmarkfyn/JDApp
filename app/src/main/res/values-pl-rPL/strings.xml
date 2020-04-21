@@ -35,7 +35,7 @@
     <string name="hospitalDetailsActivity_name">Name: </string>
     <string name="hospitalDetailsActivity_description">Description: </string>
     <string name="hospitalDetailsActivity_city">City: </string>
-    <string name="hospitalDetailsActivity_temperature">temperature: </string>
+    <string name="hospitalDetailsActivity_temperature">Temperature: </string>
 
     <!--FilterList-->
     <string name="filterAdapter_title">Tytuł</string>
