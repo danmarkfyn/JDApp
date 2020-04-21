@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import com.example.jdapp.services.WeatherService
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
 
@@ -17,6 +18,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val weather = WeatherService ("Den Bosch")
+        Log.d(
+            ContentValues.TAG,
+            "City " + weather.execute() + " found on DB and was added as a filter option"
+        )
 
         setupFBMessaging()
     }
