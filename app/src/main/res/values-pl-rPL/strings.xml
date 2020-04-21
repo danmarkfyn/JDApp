@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <!--Meta-->
     <string name="app_name">JDApp</string>
 
@@ -7,7 +7,7 @@
     <string name="main_menuTitle">JD App</string>
     <string name="main_button1">Find Hospital</string>
     <string name="main_button2">About Us</string>
-    <string name="main_button3">Settings</string>
+    <string name="main_button3">Indstillinger</string>
     <string name="hospital_button1">Add Hospital</string>
 
     <!--About-->
@@ -34,5 +34,4 @@
     <string name="filterAdapter_title">Title</string>
     <string name="filterAdapter_description">Description</string>
     <string name="filterAdapter_city">City</string>
-
 </resources>

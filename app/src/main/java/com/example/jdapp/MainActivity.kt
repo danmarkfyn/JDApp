@@ -31,6 +31,11 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun onClickSettings(view: View) {
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
+    }
+
     /**
      * used to set up FirebaseMessaging and subscribe to entityAdded
      */

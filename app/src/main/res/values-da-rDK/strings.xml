@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Meta-->
+    <string name="app_name">JDApp</string>
+
+    <!--Main-->
+    <string name="main_menuTitle">JD App</string>
+    <string name="main_button1">Find Sygehus</string>
+    <string name="main_button2">Om os</string>
+    <string name="main_button3">Indstillinger</string>
+    <string name="hospital_button1">Tilføj Sygehus</string>
+
+    <!--About-->
+    <string name="aboutActivity_titleTextView"><b>Om os</b></string>
+
+    <!--AddHospital-->
+    <string name="addHospitalLayout_nameTextView">Sygehus navn</string>
+    <string name="addHospitalLayout_descriptionTextView">Beskrivelse</string>
+    <string name="addHospitalLayout_cityTextView">By</string>
+    <string name="addHospitalLayout_seachTextView">Søg</string>
+    <string name="addHospitalActivity_submitButton">Submit</string>
+    <string name="addHospitalLayout_searchInput">Søg Sygehus...</string>
+    <!--Alert-->
+    <string name="alert_positiveButton">Ja</string>
+    <string name="alert_negativeButton">Nej</string>
+    <string name="alert_neutralButton">Cancel</string>
+    <string name="alert_warningTitle">Advarsel</string>
+    <string name="alert_emptyHospitalNameField">Hospitalets navn kan ikke være tomt!</string>
+    <string name="alert_emptyHospitalDescriptionField">Hospitalets beskrivelse kan ikke være tomt!</string>
+    <string name="alert_emptyHospitalCityField">Hospitalets by kan ikke være tomt!</string>
+    <string name="alert_saveHospitalMessage">Vil du gemme det nuværende hospital?</string>
+
+    <!--FilterList-->
+    <string name="filterAdapter_title">Titel</string>
+    <string name="filterAdapter_description">Beskrivelse</string>
+    <string name="filterAdapter_city">By</string>
+
+</resources>

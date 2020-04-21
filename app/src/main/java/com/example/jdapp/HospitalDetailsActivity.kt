@@ -66,5 +66,4 @@ class HospitalDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
         map.mapType = GoogleMap.MAP_TYPE_HYBRID
         onMapReady(gMap)
     }
-
 }
