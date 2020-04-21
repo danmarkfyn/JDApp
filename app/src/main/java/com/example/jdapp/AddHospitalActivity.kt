@@ -65,11 +65,9 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
             }
             false
         })
-
     }
 
     private fun getLocation(input: String) {
-        Toast.makeText(this, "Test in getLocation " + input, Toast.LENGTH_LONG).show()
         lateinit var location: String
         location = input
 
@@ -85,14 +83,19 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
                 val latLng = LatLng(address.latitude, address.longitude)
                 lat = address.latitude
                 long = address.longitude
-                cityEditText.text = address.locality.toString()
+                if(!address.locality.isNullOrEmpty()) {
+                    cityEditText.text = address.locality.toString()
+                } else {
+                    Toast.makeText(this, "Couldn't find any city from " + input, Toast.LENGTH_LONG).show()
+                }
+
                 gMap!!.addMarker(MarkerOptions().position(latLng).title(location))
                 gMap!!.animateCamera(CameraUpdateFactory.newLatLng(latLng))
 
             } else {
                 Toast.makeText(this, "Couldn't find any location with name " + input, Toast.LENGTH_LONG).show()
+                cityEditText.text = ""
             }
-
 
         } catch (e: IOException) {
             e.printStackTrace()
