@@ -5,33 +5,33 @@
 
     <!--Main-->
     <string name="main_menuTitle">JD App</string>
-    <string name="main_button1">Find Hospital</string>
-    <string name="main_button2">About Us</string>
-    <string name="main_button3">Indstillinger</string>
-    <string name="hospital_button1">Add Hospital</string>
+    <string name="main_button1">Zobacz szpitale</string>
+    <string name="main_button2">O nas</string>
+    <string name="main_button3">Ustawienia</string>
+    <string name="hospital_button1">Dodaj szpital</string>
 
     <!--About-->
-    <string name="aboutActivity_titleTextView"><b>About Us</b></string>
+    <string name="aboutActivity_titleTextView"><b>O nas</b></string>
 
     <!--AddHospital-->
-    <string name="addHospitalLayout_nameTextView">Hospital Name</string>
-    <string name="addHospitalLayout_descriptionTextView">Description</string>
-    <string name="addHospitalLayout_cityTextView">City</string>
-    <string name="addHospitalLayout_seachTextView">Search</string>
-    <string name="addHospitalActivity_submitButton">Submit</string>
-    <string name="addHospitalLayout_searchInput">Search hospital...</string>
+    <string name="addHospitalLayout_nameTextView">Nazwa</string>
+    <string name="addHospitalLayout_descriptionTextView">Opis</string>
+    <string name="addHospitalLayout_cityTextView">Miasto</string>
+    <string name="addHospitalLayout_seachTextView">Szukaj</string>
+    <string name="addHospitalActivity_submitButton">Zapisz</string>
+    <string name="addHospitalLayout_searchInput">Szukaj szpitala...</string>
     <!--Alert-->
-    <string name="alert_positiveButton">Yes</string>
-    <string name="alert_negativeButton">No</string>
-    <string name="alert_neutralButton">Cancel</string>
-    <string name="alert_warningTitle">Warning</string>
-    <string name="alert_emptyHospitalNameField">The hospital name cannot be empty!</string>
-    <string name="alert_emptyHospitalDescriptionField">The hospital description cannot be empty!</string>
-    <string name="alert_emptyHospitalCityField">The hospital city cannot be empty!</string>
-    <string name="alert_saveHospitalMessage">Do you want to save the current hospital?</string>
+    <string name="alert_positiveButton">Tak</string>
+    <string name="alert_negativeButton">Nie</string>
+    <string name="alert_neutralButton">Anuluj</string>
+    <string name="alert_warningTitle">Uwaga</string>
+    <string name="alert_emptyHospitalNameField">Nazwa szpitala nie może być pusta!</string>
+    <string name="alert_emptyHospitalDescriptionField">Opis szpitala nie może być pusty!</string>
+    <string name="alert_emptyHospitalCityField">Lokalizacja szpitala nie może być pusta!</string>
+    <string name="alert_saveHospitalMessage">Czy chcesz zapisać szpital?</string>
 
     <!--FilterList-->
-    <string name="filterAdapter_title">Title</string>
-    <string name="filterAdapter_description">Description</string>
-    <string name="filterAdapter_city">City</string>
+    <string name="filterAdapter_title">Tytuł</string>
+    <string name="filterAdapter_description">Opis</string>
+    <string name="filterAdapter_city">Miasto</string>
 </resources>

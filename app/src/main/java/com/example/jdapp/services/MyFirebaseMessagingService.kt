@@ -12,6 +12,11 @@ import com.example.jdapp.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
+/**
+ * This class is used to getting the notifications from the Firebase Messaging Service if any.
+ * It translate the message into the notification which is displayed on user device
+ */
+
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     val TAG = "MyFirebaseInstantMes"
@@ -35,14 +40,15 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             showNotification(remoteMessage.notification?.title, remoteMessage.notification?.body)
         }
     }
-
+    //Used to show notification when occurs
     private fun showNotification(title: String?, body: String?) {
+        //When user click on the notification, he will be redirected into main menu
         val intent = Intent(this, DisplayHospitalsActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
         val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
-        //Building notification builder for FirebaseMessagingService
+        //Building notification for FirebaseMessagingService
         val notificationBuilder = NotificationCompat.Builder(this)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setContentTitle(title)
