@@ -58,7 +58,8 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
         inputSearch = findViewById(R.id.inputSearch)
         inputSearch.setOnKeyListener(View.OnKeyListener { _, keyCode, keyEvent ->
             if(keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.action == KeyEvent.ACTION_UP) {
-                getLocation(inputSearch.text.toString())
+                var userInput = inputSearch.text.toString()
+                getLocation(userInput)
                 inputSearch.text = ""
                 return@OnKeyListener true
             }
@@ -68,7 +69,7 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun getLocation(input: String) {
-
+        Toast.makeText(this, "Test in getLocation " + input, Toast.LENGTH_LONG).show()
         lateinit var location: String
         location = input
 
@@ -76,23 +77,25 @@ class AddHospitalActivity : AppCompatActivity(), OnMapReadyCallback {
 
         try {
             val geocoder = Geocoder(this)
-            searchAddressList = geocoder.getFromLocationName(location, 5)
+            searchAddressList = geocoder.getFromLocationName(location, 1)
+
+            if(searchAddressList.isNotEmpty()) {
+
+                val address = searchAddressList!![0]
+                val latLng = LatLng(address.latitude, address.longitude)
+                lat = address.latitude
+                long = address.longitude
+                cityEditText.text = address.locality.toString()
+                gMap!!.addMarker(MarkerOptions().position(latLng).title(location))
+                gMap!!.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+
+            } else {
+                Toast.makeText(this, "Couldn't find any location with name " + input, Toast.LENGTH_LONG).show()
+            }
+
 
         } catch (e: IOException) {
             e.printStackTrace()
-        }
-
-        if(!searchAddressList.isNullOrEmpty()) {
-
-            val address = searchAddressList!![0]
-            val latLng = LatLng(address.latitude, address.longitude)
-            lat = address.latitude
-            long = address.longitude
-            cityEditText.text = address.locality.toString()
-            gMap!!.addMarker(MarkerOptions().position(latLng).title(location))
-            gMap!!.animateCamera(CameraUpdateFactory.newLatLng(latLng))
-        } else {
-            Toast.makeText(this, "Couldn't find any location with name " + input, Toast.LENGTH_LONG).show()
         }
     }
 
