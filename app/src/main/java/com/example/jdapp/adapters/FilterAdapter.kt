@@ -9,7 +9,11 @@ import android.widget.*
 import com.example.jdapp.R
 import com.example.jdapp.model.Hospital
 
-// custom adapter for filtered hospital ListView
+/**
+ * This custom adapter is made to full out a ListView with elements of type Hospital
+ * @param context Activity
+ * @param data An ArrayList holding objects of type Hospital
+ */
 class FilterAdapter(private val context: Activity, private val data: ArrayList<Hospital>) :
     ArrayAdapter<Hospital>(
         context,

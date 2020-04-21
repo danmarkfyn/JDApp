@@ -17,7 +17,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        
+
+        // subscribes to the entityAdded topic on Firebase to receive push messages when a new document is added to the DB
         setupFBMessaging()
     }
 
