@@ -11,7 +11,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class HospitalDetailsActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    //Init values
     private var gMap: GoogleMap? = null
     private var hospitalLat = 0.0
     private var hospitalLong = 0.0
